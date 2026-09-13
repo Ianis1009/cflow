@@ -110,5 +110,19 @@ void task_print_all (const Task *head) {
 }
 
 void task_free (Task **head) {
-    //TODO
+    
+    if (head == NULL) {
+        return;
+    }
+
+    Task* current = *head;
+
+    while (current != NULL) {
+        Task* next = current ->next;
+        free(current->title);
+        free(current);
+        current = next;
+    }
+
+    *head= NULL;
 }

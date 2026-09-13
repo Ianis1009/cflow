@@ -155,7 +155,42 @@ int list_delete_value (Node **head, int value) {
 
 int list_delete_at (Node** head, size_t index ) {
 
-    //TODO
+     if (head == NULL || *head == NULL) {
+        return 0;
+    }
+
+    if (index == 0) {
+        Node *to_delete = *head;
+
+        *head = to_delete->next;
+
+        free(to_delete);
+
+        return 1;
+    }
+
+    Node *current = *head;
+
+    for (size_t i = 0; i < index - 1; i++) {
+        if (current->next == NULL) {
+            return 0;
+        }
+
+        current = current->next;
+    }
+
+    if (current->next == NULL) {
+        return 0;
+    }
+
+    Node *to_delete = current->next;
+
+    current->next = to_delete->next;
+
+    free(to_delete);
+
+    return 1;
+    
 }
 
 void list_reverse (Node **head) {

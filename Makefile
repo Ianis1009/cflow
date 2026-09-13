@@ -1,39 +1,44 @@
 CC = gcc
 
 CFLAGS = -Wall -Wextra -Wpedantic -std=c11
-
 INCLUDES = -Iinclude
 
-SRC = src/list.c
-MAIN = src/main.c
-TEST = tests/test_list.c
+SRC = src/list.c \
+      src/task.c \
+      src/cli.c \
+      src/main.c
+
+TEST_SRC = src/list.c \
+           src/task.c \
+           tests/test_list.c \
+           tests/test_task.c
 
 TARGET = cflow
-TEST_TARGET = test_list
+TEST_TARGET = test_cflow
 
 
 all: $(TARGET)
 
 
-$(TARGET): $(SRC) $(MAIN)
-	$(CC) $(CFLAGS) $(INCLUDES) $(SRC) $(MAIN) -o $(TARGET)
+$(TARGET): $(SRC)
+	$(CC) $(CFLAGS) $(INCLUDES) $(SRC) -o $(TARGET)
 
 
-$(TEST_TARGET): $(SRC) $(TEST)
-	$(CC) $(CFLAGS) $(INCLUDES) $(SRC) $(TEST) -o $(TEST_TARGET)
+$(TEST_TARGET): $(TEST_SRC)
+	$(CC) $(CFLAGS) $(INCLUDES) $(TEST_SRC) -o $(TEST_TARGET)
 
 
 test: $(TEST_TARGET)
 	./$(TEST_TARGET)
 
 
+debug:
+	$(CC) $(CFLAGS) -g -fsanitize=address,undefined \
+	$(INCLUDES) $(SRC) -o $(TARGET)
+
+
 clean:
 	rm -f $(TARGET) $(TEST_TARGET)
 
 
-debug:
-	$(CC) $(CFLAGS) -g -fsanitize=address,undefined \
-	$(INCLUDES) $(SRC) $(MAIN) -o $(TARGET)
-
-
-.PHONY: all test clean debug
+.PHONY: all test debug clean

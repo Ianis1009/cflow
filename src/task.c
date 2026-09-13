@@ -54,6 +54,19 @@ void task_add(Task **head, int id, const char *title, TaskPriority priority) {
     //TOOD
 }
 
+Task* task_find (Task* head, int id) {
+
+    Task *current = head;
+
+    while (current != NULL) {
+        if (current ->id == id) {
+            return current;
+        }
+        current = current ->next;
+    }
+
+    return NULL;
+}
 int task_delete (Task **head, int id) {
 
     //TODO

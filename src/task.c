@@ -82,7 +82,15 @@ int task_complete (Task *head, int id) {
 
 ssize_t task_count (const Task *head) {
 
-    //TODO
+    ssize_t count = 0;
+    const Task *current = head;
+
+    while (current != NULL) {
+        count++;
+        current = current ->next;
+    }
+
+    return count;
 }
 
 const char* task_status_to_string (TaskStatus status) {

@@ -1,0 +1,11 @@
+cflow
+test_list
+
+*.o
+*.out
+
+.vscode/
+.idea/
+
+data/*
+!data/.gitkeep

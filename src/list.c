@@ -213,14 +213,53 @@ void list_reverse (Node **head) {
 }
 
 Node* list_middle (Node *head) {
-    //TODO
+    
+    if (head == NULL) {
+        return NULL;
+    }
+
+    Node* slow = head;
+    Node* fast = head;
+
+    while (fast != NULL && fast ->next != NULL) {
+        slow = slow ->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
 }
 
 void list_print (const Node *head) {
-    //TODO
+    
+    const Node* current = head;
+    printf("[");
+
+    while (current != NULL) {
+        printf("%d", current -> data);
+        if (current ->next != NULL) {
+            printf(" -> ");
+        }
+
+        current = current ->next;
+    }
+
+    printf("]\n");
 }
 
 void list_free (Node **head) {
 
-    //TODO
+    if (head == NULL) {
+        return;
+    }
+
+    Node* current = *head;
+    while (current != NULL) {
+        Node* next= current ->next;
+        free(current);
+        current = next;
+    }
+
+    *head = NULL;
 }
+
+

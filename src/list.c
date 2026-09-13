@@ -190,11 +190,26 @@ int list_delete_at (Node** head, size_t index ) {
     free(to_delete);
 
     return 1;
-    
+
 }
 
 void list_reverse (Node **head) {
-    //TODO
+    
+    if (head == NULL) {
+        return;
+    }
+
+    Node *previous = NULL;
+    Node* current = *head;
+
+    while (current != NULL) {
+        Node* next = current ->next;
+        current ->next = previous;
+        previous = current;
+        current = next;
+    }
+
+    *head = previous;
 }
 
 Node* list_middle (Node *head) {

@@ -94,7 +94,17 @@ ssize_t task_count (const Task *head) {
 }
 
 const char* task_status_to_string (TaskStatus status) {
-    //TODO
+    
+    switch (status) {
+        case TASK_TODO:
+            return "TODO";
+        case TASK_ACTIVE:
+            return "ACTIVE";
+        case TASK_COMPLETED:
+            return "COMPLETED";
+        default:
+            return "UNKNOWN";
+    }
 }
 
 const char *task_priority_to_string(TaskPriority priority) {

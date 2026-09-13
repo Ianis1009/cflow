@@ -108,7 +108,19 @@ const char* task_status_to_string (TaskStatus status) {
 }
 
 const char *task_priority_to_string(TaskPriority priority) {
-    //TODO
+    
+    switch(priority) {
+        case PRIORITY_LOW:
+           return "LOW";
+           
+        case PRIORITY_MEDIUM:
+            return "MEDIUM";
+        case PRIORITY_HIGH:
+            return "HIGH";
+
+        default:
+            return "UNKNOWN";
+    }
 }
 
 void task_print (const Task *task) {

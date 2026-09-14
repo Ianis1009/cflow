@@ -36,3 +36,20 @@ static void print_help(void)
 }
 
 
+static TaskPriority parse_priority (const char *value) {
+
+    if (strcmp(value, "low") == 0) {
+        return PRIORITY_LOW;
+    }
+
+    if (strcmp(value, "medium") == 0) {
+        return PRIORITY_MEDIUM;
+    }
+
+    if (strcmp(value, "high") == 0) {
+        return PRIORITY_HIGH;
+    }
+
+    return -1;
+}
+

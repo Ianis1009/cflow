@@ -165,3 +165,43 @@ static void handle_start (Task* tasks, char *input) {
     printf("Task %d started.\n", id);
 }
 
+static void handle_done (Task *tasks, char *input) {
+
+    char id_text[32];
+    int result = sscanf(input, "done %31s", id_text);
+
+    if (result != 1) {
+        printf("Usage: done <id>\n");
+        return;
+    }
+
+    int id = parse_id(id_text);
+
+    if (id == -1) {
+        printf("Invalid task ID.\n");
+        return;
+    }
+
+    Task *task = task_find(tasks, id);
+
+    if (task == NULL) {
+        printf("Task %d not found.\n", id);
+        return;
+    }
+
+    if (task->status != TASK_ACTIVE) {
+        printf("Task %d cannot be completed.\n", id);
+        return;
+    }
+
+    task_complete(tasks, id);
+
+    printf("Task %d completed.\n", id);
+
+
+}
+
+void cli_run (Task **tasks) {
+
+    //TODO
+}

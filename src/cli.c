@@ -53,3 +53,20 @@ static TaskPriority parse_priority (const char *value) {
     return -1;
 }
 
+static int parse_id(const char *value)
+{
+    char *end;
+
+    long id = strtol(value, &end, 10);
+
+    if (*value == '\0' || *end != '\0') {
+        return -1;
+    }
+
+    if (id <= 0 || id > 2147483647) {
+        return -1;
+    }
+
+    return (int)id;
+}
+

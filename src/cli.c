@@ -7,6 +7,8 @@
 #define INPUT_SIZE 512
 #define TITLE_SIZE 400
 
+#define LOOP 1
+
 static void print_help(void)
 {
     printf("\n");
@@ -203,5 +205,63 @@ static void handle_done (Task *tasks, char *input) {
 
 void cli_run (Task **tasks) {
 
-    //TODO
+    if (tasks == NULL) {
+        return;
+    }
+
+    char input[INPUT_SIZE];
+    int next_id = 1;
+
+    printf(" ---------------------- CFLOW (C11) ---------------------- \n");
+    printf("Type 'help' for available commands. \n\n");
+
+    while (LOOP ) {
+
+        printf(">> ");
+
+        if (fgets(input, sizeof(input), stdin) == NULL) {
+            break;
+        }
+
+        input[strcspn(input, "\n")] = '\0';
+
+        if (strlen(input) == 0) {continue;}
+
+        if (strcmp(input, "exit") == 0) {
+            break;
+        }
+
+        if (strcmp(input, "help") == 0) {
+            print_help();
+            continue;
+        }
+
+        if (strcmp(input, "list") == 0) {
+            handle_list(*tasks);
+            continue;
+        }
+
+        if (strncmp(input, "add ", 4) == 0) {
+            handle_add(tasks, input, &next_id);
+            continue;
+        }
+
+        if (strncmp(input, "delete ", 7) == 0) {
+            handle_delete(tasks, input);
+            continue;
+        }
+
+        if (strncmp(input, "start ", 6) == 0) {
+            handle_start(*tasks, input);
+            continue;
+        }
+
+        if (strncmp(input, "done ", 5) == 0) {
+            handle_done(*tasks, input);
+            continue;
+        }
+
+        printf("Unknown command. Type 'help'.\n");
+        
+    }
 }

@@ -51,7 +51,24 @@ Task* task_create(int id, const char *title, TaskPriority priority) {
 
 void task_add(Task **head, int id, const char *title, TaskPriority priority) {
 
-    //TOOD
+    if (head == NULL) {return;}
+
+    Task* task = task_create(id, title, priority);
+
+    if (task == NULL) {return;}
+
+    if (*head == NULL) {
+        *head = task;
+        return;
+    }
+
+    Task *current = *head;
+
+    while (current ->next != NULL) {
+        current = current ->next;
+    }
+
+    current ->next = task;
 }
 
 Task* task_find (Task* head, int id) {

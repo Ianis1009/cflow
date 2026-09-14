@@ -201,7 +201,24 @@ void task_print (const Task *task) {
 }
 
 void task_print_all (const Task *head) {
-    //TODO
+    
+    if (head == NULL) {
+        printf("No tasks.\n");
+        return;
+    }
+
+    printf("\n");
+    printf("%-4s %-10s %-12s %s\n", "ID", "PRIORITY", "STATUS", "TITLE");
+
+    printf("------------------------------------\n");
+    const Task *current = head;
+
+    while (current != NULL) {
+        task_print(current);
+        current = current ->next;
+    }
+
+    printf("\n");
 }
 
 void task_free (Task **head) {

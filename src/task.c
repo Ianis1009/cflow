@@ -86,7 +86,34 @@ Task* task_find (Task* head, int id) {
 }
 int task_delete (Task **head, int id) {
 
-    //TODO
+    if (head == NULL || *head == NULL) {
+        return 0;
+    }
+
+    Task* current = *head;
+
+    if (current->id == id) {
+        *head = current ->next;
+        free(current->title);
+        free(current);
+
+        return 1;
+    }
+
+    while (current->next != NULL) {
+        if (current->next->id == id) {
+            Task *to_delete = current->next;
+            current ->next = to_delete->next;
+            free(to_delete->title);
+            free(to_delete);
+
+            return 1;
+        }
+
+        current = current ->next;
+    }
+
+    return 0;
 }
 
 int task_start (Task*head, int id) {

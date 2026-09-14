@@ -106,7 +106,19 @@ int task_start (Task*head, int id) {
 }
 
 int task_complete (Task *head, int id) {
-    //TODO
+    
+    Task *task = task_find(head, id);
+
+    if (task == NULL) {
+        return 0;
+    }
+
+    if (task ->status != TASK_ACTIVE) {
+        return 0;
+    }
+
+    task ->status = TASK_COMPLETED;
+    return 1;
 }
 
 ssize_t task_count (const Task *head) {

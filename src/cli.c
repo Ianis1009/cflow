@@ -131,3 +131,37 @@ static void handle_delete (Task **tasks, char *input) {
 
 }
 
+static void handle_start (Task* tasks, char *input) {
+
+    char id_text[32];
+    int result = sscanf(input, "start %31s", id_text);
+
+    if (result != 1) {
+        printf("Usage: start <id>\n");
+        return;
+    }
+
+    int id = parse_id(id_text);
+
+    if (id == -1) {
+        printf("Invalid task ID.\n");
+        return;
+    }
+
+    Task *task = task_find(tasks, id);
+
+    if (task == NULL) {
+        printf("Task %d not found.\n", id);
+        return;
+    }
+
+    if (task->status != TASK_TODO) {
+        printf("Task %d cannot be started.\n", id);
+        return;
+    }
+
+    task_start(tasks, id);
+
+    printf("Task %d started.\n", id);
+}
+

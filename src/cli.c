@@ -70,3 +70,35 @@ static int parse_id(const char *value)
     return (int)id;
 }
 
+
+static void handle_add(Task **tasks, char *input, int *next_id)
+{
+    char priority_text[32];
+    char title[TITLE_SIZE];
+
+    int result = sscanf(
+        input,
+        "add %31s %399[^\n]",
+        priority_text,
+        title
+    );
+
+    if (result != 2) {
+        printf("Usage: add <priority> <title>\n");
+        return;
+    }
+
+    TaskPriority priority = parse_priority(priority_text);
+
+    if (priority == -1) {
+        printf("Invalid priority. Use: low, medium, high\n");
+        return;
+    }
+
+    task_add(tasks, *next_id, title, priority);
+
+    printf("Task added with ID %d.\n", *next_id);
+
+    (*next_id)++;
+}
+

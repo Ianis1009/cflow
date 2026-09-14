@@ -148,9 +148,9 @@ int task_complete (Task *head, int id) {
     return 1;
 }
 
-ssize_t task_count (const Task *head) {
+size_t task_count (const Task *head) {
 
-    ssize_t count = 0;
+    size_t count = 0;
     const Task *current = head;
 
     while (current != NULL) {

@@ -106,3 +106,28 @@ static void handle_list (const Task *tasks) {
     task_print_all (tasks);
 }
 
+static void handle_delete (Task **tasks, char *input) {
+
+    char id_text[32];
+    int result = sscanf(input, "delete %31s", id_text);
+
+    if (result != 1) {
+        printf("Usage: delete <id>\n");
+        return;
+    }
+
+    int id = parse_id(id_text);
+
+    if (id == -1) {
+        printf("Invalid task ID.\n");
+        return;
+    }
+
+    if (task_delete(tasks, id)) {
+        printf("Task %d deleted.\n", id);
+    } else {
+        printf("Task %d not found.\n", id);
+    }
+
+}
+

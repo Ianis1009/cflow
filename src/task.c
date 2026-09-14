@@ -90,7 +90,19 @@ int task_delete (Task **head, int id) {
 }
 
 int task_start (Task*head, int id) {
-    //TODO
+    
+    Task* task = task_find(head, id);
+
+    if (task == NULL) {
+        return 0;
+    }
+
+    if (task ->status != TASK_TODO) {
+        return 0;
+    }
+
+    task->status = TASK_ACTIVE;
+    return 1;
 }
 
 int task_complete (Task *head, int id) {

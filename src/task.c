@@ -192,7 +192,12 @@ const char *task_priority_to_string(TaskPriority priority) {
 }
 
 void task_print (const Task *task) {
-    //TODO
+    
+    if (task == NULL) {
+        return ;
+    }
+
+    printf("%-4d %-10s %-12s %s\n", task->id, task_priority_to_string(task->priority), task_status_to_string(task->status), task->title);
 }
 
 void task_print_all (const Task *head) {

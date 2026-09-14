@@ -102,3 +102,7 @@ static void handle_add(Task **tasks, char *input, int *next_id)
     (*next_id)++;
 }
 
+static void handle_list (const Task *tasks) {
+    task_print_all (tasks);
+}
+

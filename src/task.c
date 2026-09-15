@@ -238,3 +238,14 @@ void task_free (Task **head) {
 
     *head= NULL;
 }
+
+void task_destroy(Task *task)
+{
+    if (task == NULL) {
+        return;
+    }
+
+    free(task->title);
+    free(task);
+}
+

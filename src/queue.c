@@ -121,3 +121,46 @@ void queue_clear (TaskQueue *queue) {
     queue ->tail = NULL;
     queue ->size = 0;
 }
+
+
+int queue_remove(TaskQueue *queue, int task_id)
+{
+    if (queue == NULL || queue->head == NULL) {
+        return 0;
+    }
+
+    Task *current = queue->head;
+    Task *previous = NULL;
+
+    while (current != NULL) {
+
+        if (current->id == task_id) {
+
+            if (previous == NULL) {
+        
+                queue->head = current->next;
+            } else {
+                previous->next = current->next;
+            }
+
+            if (current == queue->tail) {
+                queue->tail = previous;
+            }
+
+            current->next = NULL;
+
+            queue->size--;
+
+            if (queue->head == NULL) {
+                queue->tail = NULL;
+            }
+
+            return 1;
+        }
+
+        previous = current;
+        current = current->next;
+    }
+
+    return 0;
+}

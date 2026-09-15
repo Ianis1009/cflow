@@ -73,5 +73,16 @@ Task* queue_find (TaskQueue *queue, int task_id) {
         return NULL;
     }
 
-    //TODO
+    Task* current = queue ->head;
+
+    while (current != NULL ) {
+        if (current-> id == task_id) {
+            return current;
+        }
+
+        current = current ->next;
+    }
+
+    return NULL;
 }
+

@@ -29,3 +29,49 @@ size_t queue_size (const TaskQueue *queue) {
     return queue ->size;
 }
 
+int queue_push (TaskQueue *queue, Task *task) {
+
+    if (queue == NULL || task == NULL) {
+        return 0;
+    }
+
+    task ->next = NULL;
+    if (queue ->head == NULL) {
+        queue ->head = task;
+        queue ->tail = task;
+        queue ->size++ ;
+        return 1;
+    }
+
+    queue ->tail->next = task;
+    queue ->tail = task;
+    queue ->size++;
+
+    return 1;
+}
+
+Task* queue_pop (TaskQueue *queue) {
+
+    if (queue == NULL || queue ->head == NULL) {
+        return NULL;
+    }
+
+    Task *task = queue ->head;
+    queue ->head = task ->next;
+    if (queue ->head == NULL) {
+        queue ->tail = NULL;
+    }
+
+    task ->next = NULL;
+    queue ->size--;
+
+    return task;
+}
+
+Task* queue_find (TaskQueue *queue, int task_id) {
+    if (queue == NULL ) {
+        return NULL;
+    }
+
+    //TODO
+}

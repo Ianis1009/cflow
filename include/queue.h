@@ -21,4 +21,9 @@ int queue_push (TaskQueue *queue, Task *task);
 Task* queue_pop (TaskQueue *queue);
 int queue_remove (TaskQueue *queue, int task_id);
 
+Task* queue_find (TaskQueue *queue, int task_id);
+void queue_print (const TaskQueue *queue);
+void queue_clear (TaskQueue *queue);
+
+
 #endif 

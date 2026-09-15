@@ -86,3 +86,38 @@ Task* queue_find (TaskQueue *queue, int task_id) {
     return NULL;
 }
 
+void queue_print (const TaskQueue *queue) {
+
+    if (queue == NULL || queue ->head == NULL) {
+        printf("No tasks. \n");
+        return ;
+    }
+
+    const Task* current = queue->head;
+
+    while (current != NULL) {
+        task_print(current);
+        current = current ->next;
+    }
+}
+
+void queue_clear (TaskQueue *queue) {
+
+    if (queue == NULL) {
+        return;
+    }
+
+    Task* current = queue ->head;
+
+    while (current != NULL) {
+        Task* next = current ->next;
+        free(current->title);
+        free(current);
+
+        current = next;
+    }
+
+    queue ->head = NULL;
+    queue ->tail = NULL;
+    queue ->size = 0;
+}

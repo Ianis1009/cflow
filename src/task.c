@@ -249,3 +249,18 @@ void task_destroy(Task *task)
     free(task);
 }
 
+void task_free_all (Task **head) {
+
+    if (head == NULL) {
+        return;
+    }
+
+    Task *current = *head;
+    while (current != NULL) {
+        Task *next = current ->next;
+        task_destroy(current);
+        current = next;
+    }
+
+    *head = NULL;
+}

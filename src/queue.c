@@ -20,3 +20,12 @@ int queue_is_empty (const TaskQueue *queue) {
     return queue ->head == NULL;
 }
 
+size_t queue_size (const TaskQueue *queue) {
+
+    if (queue == NULL) {
+        return 0;
+    }
+
+    return queue ->size;
+}
+
